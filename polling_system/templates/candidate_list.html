@@ -1,0 +1,32 @@
+{% extends 'base_generator.html' %}
+{% load static %}
+
+{% block title %}
+    Candidate Page
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'polling_system/candidate_list.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+
+    <h1>Candidate List</h1>
+
+    <ul>
+        {% for candidate in candidates %}
+            <li>
+                {% if candidate.id %}
+                    <a href="{% url 'candidate_detail' candidate.id %}">{{ candidate.user.first_name }} {{ candidate.user.family_name }}</a>
+                {% else %}
+                    {{ candidate.user.first_name }} {{ candidate.user.family_name }}
+                {% endif %}
+                <p>{{ candidate.party.title }}</p>
+                <!-- Add more candidate details as needed -->
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

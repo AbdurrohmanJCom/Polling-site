@@ -1,0 +1,30 @@
+{% extends 'base_generator.html' %}
+{% load static %}
+
+{% block title %}
+    <title>{{ poll.title }} - Poll Detail</title>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'polling_system/poll_detail.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+    <h1>{{ poll.title }}</h1>
+
+    <p><strong>Description:</strong> {{ poll.description }}</p>
+    <p><strong>Start Date:</strong> {{ poll.start_date }}</p>
+    <p><strong>End Date:</strong> {{ poll.end_date }}</p>
+
+    <h2>Candidates</h2>
+    <ul>
+        {% for candidate in poll.candidates.all %}
+            <li>{{ candidate.user.first_name }} {{ candidate.user.family_name }} - {{ candidate.party.title }}</li>
+        {% endfor %}
+    </ul>
+
+
+    <a href="{% url 'poll_list' %}">Back to Poll List</a>
+{% endblock %}
